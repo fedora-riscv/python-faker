@@ -7,7 +7,7 @@ service, Faker is for you.
 
 Name:           python-%{pkgname}
 Version:        0.5.3
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        %{sum}
 
 License:        MIT
@@ -88,6 +88,9 @@ install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker-py2
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html docs/_build/text
 
 %changelog
+* Thu Nov 12 2015 Kalev Lember <klember@redhat.com> - 0.5.3-5
+- Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
+
 * Tue Nov 03 2015 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.5.3-4
 - Move all doc files to the doc subpackage
 - Include the man page in the main packages
