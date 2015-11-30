@@ -7,7 +7,7 @@ service, Faker is for you.
 
 Name:           python-%{pkgname}
 Version:        0.5.3
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        %{sum}
 
 License:        MIT
@@ -59,19 +59,8 @@ popd
 
 %install
 %py2_install
-mv %{buildroot}%{_bindir}/faker %{buildroot}%{_bindir}/python2-faker
 %py3_install
-mv %{buildroot}%{_bindir}/faker %{buildroot}%{_bindir}/python3-faker
-install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker-2.1
 install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker.1
-pushd %{buildroot}%{_bindir}
-for i in faker-2 faker-%{?python2_version}; do
-  ln -s python2-faker $i
-done
-for i in faker faker-3 faker-%{?python3_version}; do
-  ln -s python3-faker $i
-done
-popd
 
 # Tests fail to run:
 # https://github.com/joke2k/faker/issues/292
@@ -81,19 +70,12 @@ popd
 
 %files -n python2-%{pkgname}
 %license LICENSE.txt
-%{_bindir}/python2-faker
-%{_bindir}/faker-2
-%{_bindir}/faker-%{?python2_version}
 %{python2_sitelib}/%{pkgname}
 %{python2_sitelib}/fake_factory-%{version}-py*.egg-info
-%{_mandir}/man1/faker-2.1*
 
 %files -n python3-%{pkgname}
 %license LICENSE.txt
-%{_bindir}/python3-faker
 %{_bindir}/faker
-%{_bindir}/faker-3
-%{_bindir}/faker-%{?python3_version}
 %{python3_sitelib}/%{pkgname}
 %{python3_sitelib}/fake_factory-%{version}-py*.egg-info
 %{_mandir}/man1/faker.1*
@@ -102,6 +84,9 @@ popd
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html docs/_build/text
 
 %changelog
+* Mon Nov 30 2015 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.5.3-7
+- Leave only python3 version of faker script
+
 * Wed Nov 25 2015 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.5.3-6
 - link binary for different python versions
 
