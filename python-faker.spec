@@ -7,7 +7,7 @@ service, Faker is for you.
 
 Name:           python-%{pkgname}
 Version:        0.5.3
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        %{sum}
 
 License:        MIT
@@ -84,6 +84,9 @@ install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker.1
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html docs/_build/text
 
 %changelog
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.3-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Mon Nov 30 2015 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.5.3-7
 - Leave only python3 version of faker script
 
