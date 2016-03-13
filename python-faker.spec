@@ -6,8 +6,8 @@ persistence to stress test it, or anonymize data taken from a production \
 service, Faker is for you.
 
 Name:           python-%{pkgname}
-Version:        0.5.3
-Release:        8%{?dist}
+Version:        0.5.7
+Release:        1%{?dist}
 Summary:        %{sum}
 
 License:        MIT
@@ -18,6 +18,8 @@ BuildArch:      noarch
 BuildRequires:  python2-devel 
 BuildRequires:  python3-devel
 BuildRequires:  python-sphinx
+BuildRequires:  python-dateutil
+BuildRequires:  python-ipaddress
 
 %description
 %{desc}
@@ -52,7 +54,6 @@ Documentation for python-%{pkgname}
 %py3_build
 pushd docs
 PYTHONPATH='..' %make_build html
-PYTHONPATH='..' %make_build text
 PYTHONPATH='..' %make_build man
 find . -type f -name '.buildinfo' -delete
 popd
@@ -81,9 +82,12 @@ install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker.1
 %{_mandir}/man1/faker.1*
 
 %files doc
-%doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html docs/_build/text
+%doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
 
 %changelog
+* Sun Mar 13 2016 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.5.7-1
+- Version 0.5.7
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.3-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
