@@ -6,7 +6,7 @@ persistence to stress test it, or anonymize data taken from a production \
 service, Faker is for you.
 
 Name:           python-%{pkgname}
-Version:        0.5.8
+Version:        0.5.9
 Release:        1%{?dist}
 Summary:        %{sum}
 
@@ -85,6 +85,9 @@ install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker.1
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
 
 %changelog
+* Tue Jul 12 2016 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.5.9-1
+- Version 0.5.9
+
 * Mon Jul 04 2016 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.5.8-1
 - Version 0.5.8
 
