@@ -7,7 +7,7 @@ service, Faker is for you.
 
 Name:           python-%{pkgname}
 Version:        0.5.9
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        %{sum}
 
 License:        MIT
@@ -54,14 +54,15 @@ Documentation for python-%{pkgname}
 %py3_build
 pushd docs
 PYTHONPATH='..' %make_build html
-PYTHONPATH='..' %make_build man
+# Generation of man page not working for now
+#PYTHONPATH='..' %%make_build man
 find . -type f -name '.buildinfo' -delete
 popd
 
 %install
 %py2_install
 %py3_install
-install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker.1
+#install -D -m 0644 docs/_build/man/faker.1 %%{buildroot}%%{_mandir}/man1/faker.1
 
 # Tests fail to run:
 # https://github.com/joke2k/faker/issues/292
@@ -79,12 +80,15 @@ install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker.1
 %{_bindir}/faker
 %{python3_sitelib}/%{pkgname}
 %{python3_sitelib}/fake_factory-%{version}-py*.egg-info
-%{_mandir}/man1/faker.1*
+#%%{_mandir}/man1/faker.1*
 
 %files doc
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
 
 %changelog
+* Wed Jul 20 2016 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.5.9-3
+- Disable man page generation
+
 * Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.5.9-2
 - https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
