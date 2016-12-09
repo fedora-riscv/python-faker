@@ -1,18 +1,17 @@
 %global pkgname faker
-%global sum Faker is a Python package that generates fake data for you
 %global desc Faker is a Python package that generates fake data for you. Whether you need \
 to bootstrap your database, create good-looking XML documents, fill-in your \
 persistence to stress test it, or anonymize data taken from a production \
 service, Faker is for you.
 
 Name:           python-%{pkgname}
-Version:        0.5.9
-Release:        3%{?dist}
-Summary:        %{sum}
+Version:        0.7.3
+Release:        1%{?dist}
+Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
-URL:            http://www.joke2k.net/faker/
-Source:         https://github.com/joke2k/%{pkgname}/archive/v%{version}.tar.gz
+URL:            http://faker.rtfd.org/
+Source:         https://github.com/joke2k/%{pkgname}/archive/v%{version}.tar.gz#/%{pkgname}-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  python2-devel 
@@ -25,7 +24,7 @@ BuildRequires:  python-ipaddress
 %{desc}
 
 %package -n python2-%{pkgname}
-Summary:        %{sum}
+Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{pkgname}}
 Suggests:       %{name}-doc = %{version}-%{release}
 
@@ -33,7 +32,7 @@ Suggests:       %{name}-doc = %{version}-%{release}
 %{desc}
 
 %package -n python3-%{pkgname}
-Summary:        %{sum}
+Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{pkgname}}
 Suggests:       %{name}-doc = %{version}-%{release}
 
@@ -41,10 +40,10 @@ Suggests:       %{name}-doc = %{version}-%{release}
 %{desc}
 
 %package doc
-Summary:        Documentation for python-%{pkgname}
+Summary:        Documentation for %{name}
 
 %description doc
-Documentation for python-%{pkgname}
+Documentation for %{name}
 
 %prep
 %autosetup -n %{pkgname}-%{version}
@@ -54,15 +53,14 @@ Documentation for python-%{pkgname}
 %py3_build
 pushd docs
 PYTHONPATH='..' %make_build html
-# Generation of man page not working for now
-#PYTHONPATH='..' %%make_build man
+PYTHONPATH='..' %make_build man
 find . -type f -name '.buildinfo' -delete
 popd
 
 %install
 %py2_install
 %py3_install
-#install -D -m 0644 docs/_build/man/faker.1 %%{buildroot}%%{_mandir}/man1/faker.1
+install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker.1
 
 # Tests fail to run:
 # https://github.com/joke2k/faker/issues/292
@@ -73,19 +71,22 @@ popd
 %files -n python2-%{pkgname}
 %license LICENSE.txt
 %{python2_sitelib}/%{pkgname}
-%{python2_sitelib}/fake_factory-%{version}-py*.egg-info
+%{python2_sitelib}/Faker-%{version}-py*.egg-info
 
 %files -n python3-%{pkgname}
 %license LICENSE.txt
 %{_bindir}/faker
 %{python3_sitelib}/%{pkgname}
-%{python3_sitelib}/fake_factory-%{version}-py*.egg-info
-#%%{_mandir}/man1/faker.1*
+%{python3_sitelib}/Faker-%{version}-py*.egg-info
+%{_mandir}/man1/faker.1*
 
 %files doc
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
 
 %changelog
+* Fri Dec 09 2016 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.7.3-1
+- Version 0.7.3
+
 * Wed Jul 20 2016 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.5.9-3
 - Disable man page generation
 
