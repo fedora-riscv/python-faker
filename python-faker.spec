@@ -6,7 +6,7 @@ service, Faker is for you.
 
 Name:           python-%{pkgname}
 Version:        0.7.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
@@ -84,6 +84,9 @@ install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker.1
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
 
 %changelog
+* Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 0.7.3-2
+- Rebuild for Python 3.6
+
 * Fri Dec 09 2016 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.7.3-1
 - Version 0.7.3
 
