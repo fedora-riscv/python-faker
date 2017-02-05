@@ -5,8 +5,8 @@ persistence to stress test it, or anonymize data taken from a production \
 service, Faker is for you.
 
 Name:           python-%{pkgname}
-Version:        0.7.3
-Release:        2%{?dist}
+Version:        0.7.7
+Release:        1%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
@@ -27,6 +27,7 @@ BuildRequires:  python-ipaddress
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{pkgname}}
 Suggests:       %{name}-doc = %{version}-%{release}
+Requires:       python2-dateutil
 
 %description -n python2-%{pkgname}
 %{desc}
@@ -35,6 +36,7 @@ Suggests:       %{name}-doc = %{version}-%{release}
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{pkgname}}
 Suggests:       %{name}-doc = %{version}-%{release}
+Requires:       python3-dateutil
 
 %description -n python3-%{pkgname}
 %{desc}
@@ -84,6 +86,10 @@ install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker.1
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
 
 %changelog
+* Sun Feb 05 2017 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.7.7-1
+- Version 0.7.7
+- Add dateutil dependency (RHBZ#1419285)
+
 * Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 0.7.3-2
 - Rebuild for Python 3.6
 
