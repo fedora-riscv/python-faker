@@ -5,7 +5,7 @@ persistence to stress test it, or anonymize data taken from a production \
 service, Faker is for you.
 
 Name:           python-%{pkgname}
-Version:        0.7.9
+Version:        0.7.10
 Release:        1%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
@@ -55,14 +55,12 @@ Documentation for %{name}
 %py3_build
 pushd docs
 PYTHONPATH='..' %make_build html
-PYTHONPATH='..' %make_build man
 find . -type f -name '.buildinfo' -delete
 popd
 
 %install
 %py2_install
 %py3_install
-install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker.1
 
 # Tests fail to run:
 # https://github.com/joke2k/faker/issues/292
@@ -80,12 +78,15 @@ install -D -m 0644 docs/_build/man/faker.1 %{buildroot}%{_mandir}/man1/faker.1
 %{_bindir}/faker
 %{python3_sitelib}/%{pkgname}
 %{python3_sitelib}/Faker-%{version}-py*.egg-info
-%{_mandir}/man1/faker.1*
 
 %files doc
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
 
 %changelog
+* Wed Apr 05 2017 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.7.10-1
+- Version 0.7.10
+- Remove huge man page
+
 * Sun Feb 26 2017 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.7.9-1
 - Version 0.7.9
 
