@@ -5,12 +5,12 @@ persistence to stress test it, or anonymize data taken from a production \
 service, Faker is for you.
 
 Name:           python-%{pkgname}
-Version:        0.7.10
+Version:        0.7.17
 Release:        1%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
-URL:            http://faker.readthedocs.io
+URL:            https://faker.readthedocs.io
 Source:         https://github.com/joke2k/%{pkgname}/archive/v%{version}.tar.gz#/%{pkgname}-%{version}.tar.gz
 
 BuildArch:      noarch
@@ -83,6 +83,9 @@ popd
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
 
 %changelog
+* Fri Jun 30 2017 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.7.17-1
+- Version 0.7.17
+
 * Wed Apr 05 2017 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.7.10-1
 - Version 0.7.10
 - Remove huge man page
