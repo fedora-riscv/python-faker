@@ -6,7 +6,7 @@ service, Faker is for you.
 
 Name:           python-%{pkgname}
 Version:        0.7.18
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
@@ -83,6 +83,9 @@ popd
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
 
 %changelog
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.7.18-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Fri Jul 21 2017 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.7.18-1
 - Version 0.7.18
 - Add versioned python dependencies
