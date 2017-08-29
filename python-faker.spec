@@ -7,7 +7,7 @@ service, Faker is for you.
 
 Name:           python-%{srcname}
 Version:        0.8.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
@@ -19,7 +19,11 @@ BuildRequires:  python2-devel
 BuildRequires:  python3-devel
 BuildRequires:  python2-sphinx
 BuildRequires:  python2-dateutil
+%if 0%{?fedora} >= 28
 BuildRequires:  python2-ipaddress
+%else
+BuildRequires:  python-ipaddress
+%endif
 
 %description
 %{desc}
@@ -30,7 +34,11 @@ Summary:        %{summary}
 Suggests:       %{name}-doc = %{version}-%{release}
 Requires:       python2-dateutil
 Requires:       python2-six
+%if 0%{?fedora} >= 28
 Requires:       python2-ipaddress
+%else
+Requires:       python-ipaddress
+%endif
 
 %description -n python2-%{srcname} %_description
 
@@ -84,6 +92,9 @@ popd
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
 
 %changelog
+* Tue Aug 29 2017 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.8.0-2
+- Use python2-ipaddress for F28+
+
 * Tue Aug 29 2017 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.8.0-1
 - Version 0.8.0
 - Update dependencies
