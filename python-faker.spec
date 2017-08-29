@@ -1,54 +1,55 @@
-%global pkgname faker
-%global desc Faker is a Python package that generates fake data for you. Whether you need \
-to bootstrap your database, create good-looking XML documents, fill-in your \
-persistence to stress test it, or anonymize data taken from a production \
+%global srcname faker
+%global _description\
+Faker is a Python package that generates fake data for you. Whether you need\
+to bootstrap your database, create good-looking XML documents, fill-in your\
+persistence to stress test it, or anonymize data taken from a production\
 service, Faker is for you.
 
-Name:           python-%{pkgname}
-Version:        0.7.18
-Release:        2%{?dist}
+Name:           python-%{srcname}
+Version:        0.8.0
+Release:        1%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
 URL:            https://faker.readthedocs.io
-Source:         https://github.com/joke2k/%{pkgname}/archive/v%{version}.tar.gz#/%{pkgname}-%{version}.tar.gz
+Source:         https://github.com/joke2k/%{srcname}/archive/v%{version}/%{srcname}-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  python2-devel 
 BuildRequires:  python3-devel
 BuildRequires:  python2-sphinx
 BuildRequires:  python2-dateutil
-BuildRequires:  python-ipaddress
+BuildRequires:  python2-ipaddress
 
 %description
 %{desc}
 
-%package -n python2-%{pkgname}
+%package -n python2-%{srcname}
 Summary:        %{summary}
-%{?python_provide:%python_provide python2-%{pkgname}}
+%{?python_provide:%python_provide python2-%{srcname}}
 Suggests:       %{name}-doc = %{version}-%{release}
 Requires:       python2-dateutil
+Requires:       python2-six
+Requires:       python2-ipaddress
 
-%description -n python2-%{pkgname}
-%{desc}
+%description -n python2-%{srcname} %_description
 
-%package -n python3-%{pkgname}
+%package -n python3-%{srcname}
 Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{pkgname}}
+%{?python_provide:%python_provide python3-%{srcname}}
 Suggests:       %{name}-doc = %{version}-%{release}
 Requires:       python3-dateutil
+Requires:       python3-six
 
-%description -n python3-%{pkgname}
-%{desc}
+%description -n python3-%{srcname} %_description
 
 %package doc
 Summary:        Documentation for %{name}
 
-%description doc
-Documentation for %{name}
+%description doc %_description
 
 %prep
-%autosetup -n %{pkgname}-%{version}
+%autosetup -n %{srcname}-%{version}
 
 %build
 %py2_build
@@ -68,21 +69,25 @@ popd
 #%%{__python2} setup.py test
 #%%{__python3} setup.py test
 
-%files -n python2-%{pkgname}
+%files -n python2-%{srcname}
 %license LICENSE.txt
-%{python2_sitelib}/%{pkgname}
+%{python2_sitelib}/%{srcname}
 %{python2_sitelib}/Faker-%{version}-py*.egg-info
 
-%files -n python3-%{pkgname}
+%files -n python3-%{srcname}
 %license LICENSE.txt
 %{_bindir}/faker
-%{python3_sitelib}/%{pkgname}
+%{python3_sitelib}/%{srcname}
 %{python3_sitelib}/Faker-%{version}-py*.egg-info
 
 %files doc
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
 
 %changelog
+* Tue Aug 29 2017 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.8.0-1
+- Version 0.8.0
+- Update dependencies
+
 * Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.7.18-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
