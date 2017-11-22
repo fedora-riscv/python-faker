@@ -7,7 +7,7 @@ service, Faker is for you.
 
 Name:           python-%{srcname}
 Version:        0.8.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
@@ -17,16 +17,17 @@ Source:         https://github.com/joke2k/%{srcname}/archive/v%{version}/%{srcna
 BuildArch:      noarch
 BuildRequires:  python2-devel 
 BuildRequires:  python3-devel
-BuildRequires:  python2-sphinx
-BuildRequires:  python2-dateutil
-%if 0%{?fedora} >= 28
-BuildRequires:  python2-ipaddress
-%else
-BuildRequires:  python-ipaddress
-%endif
+# Doc building disabled because missing text_unidecode dependency
+#BuildRequires:  python2-sphinx
+#BuildRequires:  python2-unidecode
+#BuildRequires:  python2-dateutil
+#%%if 0%%{?fedora} >= 28
+#BuildRequires:  python2-ipaddress
+#%%else
+#BuildRequires:  python-ipaddress
+#%%endif
 
-%description
-%{desc}
+%description %_description
 
 %package -n python2-%{srcname}
 Summary:        %{summary}
@@ -62,10 +63,11 @@ Summary:        Documentation for %{name}
 %build
 %py2_build
 %py3_build
-pushd docs
-PYTHONPATH='..' %make_build html
-find . -type f -name '.buildinfo' -delete
-popd
+# Doc building disabled
+#pushd docs
+#PYTHONPATH='..' %%make_build html
+#find . -type f -name '.buildinfo' -delete
+#popd
 
 %install
 %py2_install
@@ -90,9 +92,12 @@ popd
 
 %files doc
 %license LICENSE.txt
-%doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/_build/html
+%doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/*.rst
 
 %changelog
+* Tue Nov 21 2017 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.8.7-2
+- Disable doc building because missing dependencies
+
 * Tue Nov 21 2017 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.8.7-1
 - Version 0.8.7
 
