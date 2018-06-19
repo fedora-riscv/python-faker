@@ -7,7 +7,7 @@ service, Faker is for you.
 
 Name:           python-%{srcname}
 Version:        0.8.15
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
@@ -95,6 +95,9 @@ Summary:        Documentation for %{name}
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/*.rst
 
 %changelog
+* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 0.8.15-2
+- Rebuilt for Python 3.7
+
 * Wed May 16 2018 Juan Orti Alcaine <jorti@fedoraproject.org> - 0.8.15-1
 - Version 0.8.15
 
