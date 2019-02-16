@@ -1,3 +1,4 @@
+%{?python_enable_dependency_generator}
 %global srcname faker
 %global _description\
 Faker is a Python package that generates fake data for you. Whether you need\
@@ -6,8 +7,8 @@ persistence to stress test it, or anonymize data taken from a production\
 service, Faker is for you.
 
 Name:           python-%{srcname}
-Version:        0.9.0
-Release:        2%{?dist}
+Version:        1.0.2
+Release:        1%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
@@ -15,40 +16,15 @@ URL:            https://faker.readthedocs.io
 Source:         https://github.com/joke2k/%{srcname}/archive/v%{version}/%{srcname}-%{version}.tar.gz
 
 BuildArch:      noarch
-BuildRequires:  python2-devel 
 BuildRequires:  python3-devel
-# Doc building disabled because missing text_unidecode dependency
-#BuildRequires:  python2-sphinx
-#BuildRequires:  python2-unidecode
-#BuildRequires:  python2-dateutil
-#%%if 0%%{?fedora} >= 28
-#BuildRequires:  python2-ipaddress
-#%%else
-#BuildRequires:  python-ipaddress
-#%%endif
+BuildRequires:  python3-pytest-runner
 
 %description %_description
-
-%package -n python2-%{srcname}
-Summary:        %{summary}
-%{?python_provide:%python_provide python2-%{srcname}}
-Suggests:       %{name}-doc = %{version}-%{release}
-Requires:       python2-dateutil
-Requires:       python2-six
-%if 0%{?fedora} >= 28
-Requires:       python2-ipaddress
-%else
-Requires:       python-ipaddress
-%endif
-
-%description -n python2-%{srcname} %_description
 
 %package -n python3-%{srcname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{srcname}}
 Suggests:       %{name}-doc = %{version}-%{release}
-Requires:       python3-dateutil
-Requires:       python3-six
 
 %description -n python3-%{srcname} %_description
 
@@ -61,28 +37,10 @@ Summary:        Documentation for %{name}
 %autosetup -n %{srcname}-%{version}
 
 %build
-%py2_build
 %py3_build
-# Doc building disabled
-#pushd docs
-#PYTHONPATH='..' %%make_build html
-#find . -type f -name '.buildinfo' -delete
-#popd
 
 %install
-%py2_install
 %py3_install
-
-# Tests fail to run:
-# https://github.com/joke2k/faker/issues/292
-#%%check
-#%%{__python2} setup.py test
-#%%{__python3} setup.py test
-
-%files -n python2-%{srcname}
-%license LICENSE.txt
-%{python2_sitelib}/%{srcname}
-%{python2_sitelib}/Faker-%{version}-py*.egg-info
 
 %files -n python3-%{srcname}
 %license LICENSE.txt
@@ -95,6 +53,10 @@ Summary:        Documentation for %{name}
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/*.rst
 
 %changelog
+* Sat Feb 16 2019 Juan Orti Alcaine <jorti@fedoraproject.org> - 1.0.2-1
+- Version 1.0.2
+- Drop python2 subpackage
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
