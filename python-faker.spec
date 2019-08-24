@@ -13,6 +13,7 @@ Summary:        Faker is a Python package that generates fake data for you
 License:        MIT
 URL:            https://faker.readthedocs.io
 Source:         https://github.com/joke2k/%{srcname}/archive/v%{version}/%{srcname}-%{version}.tar.gz
+# https://github.com/joke2k/faker/issues/727
 Patch0:         faker-2.0.1-revert_switch_to_text_unidecode.patch
 
 BuildArch:      noarch
