@@ -1,4 +1,3 @@
-%{?python_enable_dependency_generator}
 %global srcname faker
 %global _description\
 Faker is a Python package that generates fake data for you. Whether you need\
@@ -7,8 +6,8 @@ persistence to stress test it, or anonymize data taken from a production\
 service, Faker is for you.
 
 Name:           python-%{srcname}
-Version:        1.0.2
-Release:        3%{?dist}
+Version:        2.0.1
+Release:        1%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
@@ -53,6 +52,9 @@ Summary:        Documentation for %{name}
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/*.rst
 
 %changelog
+* Sat Aug 24 2019 Juan Orti Alcaine <jortialc@redhat.com> - 2.0.1-1
+- Version 2.0.1
+
 * Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 1.0.2-3
 - Rebuilt for Python 3.8
 
