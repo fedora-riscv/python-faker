@@ -7,12 +7,13 @@ service, Faker is for you.
 
 Name:           python-%{srcname}
 Version:        2.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
 URL:            https://faker.readthedocs.io
 Source:         https://github.com/joke2k/%{srcname}/archive/v%{version}/%{srcname}-%{version}.tar.gz
+Patch0:         faker-2.0.1-revert_switch_to_text_unidecode.patch
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
@@ -33,7 +34,7 @@ Summary:        Documentation for %{name}
 %description doc %_description
 
 %prep
-%autosetup -n %{srcname}-%{version}
+%autosetup -p1 -n %{srcname}-%{version}
 
 %build
 %py3_build
@@ -52,6 +53,9 @@ Summary:        Documentation for %{name}
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/*.rst
 
 %changelog
+* Sat Aug 24 2019 Juan Orti Alcaine <jortialc@redhat.com> - 2.0.1-2
+- Add patch to revert the switch to text-unidecode
+
 * Sat Aug 24 2019 Juan Orti Alcaine <jortialc@redhat.com> - 2.0.1-1
 - Version 2.0.1
 

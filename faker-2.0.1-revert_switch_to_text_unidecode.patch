@@ -1,0 +1,49 @@
+From 1c12e96b4bc0a88fe87487d3958a18faaf08311f Mon Sep 17 00:00:00 2001
+From: Juan Orti Alcaine <jortialc@redhat.com>
+Date: Sat, 24 Aug 2019 21:58:58 +0200
+Subject: [PATCH] Revert "Close #628. Switch to text-unidecode"
+
+This reverts commit e32a0cd73d7e1f42e12593bf6024ba7607454f54.
+---
+ faker/providers/internet/__init__.py | 4 ++--
+ setup.py                             | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/faker/providers/internet/__init__.py b/faker/providers/internet/__init__.py
+index 91bc9f2..ca9e2a0 100644
+--- a/faker/providers/internet/__init__.py
++++ b/faker/providers/internet/__init__.py
+@@ -1,7 +1,7 @@
+ # coding=utf-8
+ from __future__ import unicode_literals
+ 
+-from text_unidecode import unidecode
++import unidecode
+ 
+ from .. import BaseProvider
+ 
+@@ -123,7 +123,7 @@ class Provider(BaseProvider):
+         for search, replace in self.replacements:
+             string = string.replace(search, replace)
+ 
+-        string = unidecode(string)
++        string = unidecode.unidecode(string)
+         return string
+ 
+     @lowercase
+diff --git a/setup.py b/setup.py
+index e0ef8ee..65aabfd 100644
+--- a/setup.py
++++ b/setup.py
+@@ -66,7 +66,7 @@ setup(
+     install_requires=[
+         "python-dateutil>=2.4",
+         "six>=1.10",
+-        "text-unidecode==1.2",
++        "unidecode",
+     ],
+     tests_require=[
+         "validators>=0.13.0",
+-- 
+2.21.0
+
