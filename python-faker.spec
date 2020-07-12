@@ -6,8 +6,8 @@ persistence to stress test it, or anonymize data taken from a production\
 service, Faker is for you.
 
 Name:           python-%{srcname}
-Version:        4.1.0
-Release:        2%{?dist}
+Version:        4.1.1
+Release:        1%{?dist}
 Summary:        Faker is a Python package that generates fake data for you
 
 License:        MIT
@@ -52,6 +52,9 @@ Summary:        Documentation for %{name}
 %doc README.rst CHANGELOG.rst CONTRIBUTING.rst docs/*.rst
 
 %changelog
+* Sun Jul 12 2020 Juan Orti Alcaine <jortialc@redhat.com> - 4.1.1-1
+- Version 4.1.1
+
 * Tue May 26 2020 Miro Hrončok <mhroncok@redhat.com> - 4.1.0-2
 - Rebuilt for Python 3.9
 
