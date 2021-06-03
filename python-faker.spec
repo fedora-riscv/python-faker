@@ -5,31 +5,36 @@ to bootstrap your database, create good-looking XML documents, fill-in your\
 persistence to stress test it, or anonymize data taken from a production\
 service, Faker is for you.
 
-Name:           python-%{srcname}
-Version:        8.4.0
-Release:        1%{?dist}
-Summary:        Faker is a Python package that generates fake data for you
-
-License:        MIT
-URL:            https://faker.readthedocs.io
-Source:         https://github.com/joke2k/%{srcname}/archive/v%{version}/%{srcname}-%{version}.tar.gz
-
-BuildArch:      noarch
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-pytest-runner
+Name: python-%{srcname}
+Version: 8.5.0
+Release: 1%{?dist}
+Summary: Faker is a Python package that generates fake data for you
+License: MIT
+URL: https://faker.readthedocs.io
+Source: https://github.com/joke2k/%{srcname}/archive/v%{version}/%{srcname}-%{version}.tar.gz
+BuildArch: noarch
+BuildRequires: python3-devel
+BuildRequires: python3-setuptools
+# Tests
+BuildRequires: python3-pytest
+BuildRequires: python3-dateutil
+BuildRequires: python3-text-unidecode
+BuildRequires: python3-freezegun
+BuildRequires: python3-validators
+BuildRequires: python3-random2
+BuildRequires: python3-pillow
 
 %description %_description
 
 %package -n python3-%{srcname}
-Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{srcname}}
-Suggests:       %{name}-doc = %{version}-%{release}
+Summary: %{summary}
+%py_provides python3-%{srcname}
+Suggests: %{name}-doc = %{version}-%{release}
 
 %description -n python3-%{srcname} %_description
 
 %package doc
-Summary:        Documentation for %{name}
+Summary: Documentation for %{name}
 
 %description doc %_description
 
@@ -42,6 +47,10 @@ Summary:        Documentation for %{name}
 %install
 %py3_install
 
+%check
+# Exclude tests that require the faker.sphinx module
+%pytest --ignore-glob='tests/sphinx/*'
+
 %files -n python3-%{srcname}
 %license LICENSE.txt
 %{_bindir}/faker
@@ -53,6 +62,11 @@ Summary:        Documentation for %{name}
 %doc README.rst CHANGELOG.md CONTRIBUTING.rst RELEASE_PROCESS.rst docs/*.rst
 
 %changelog
+* Thu Jun 03 2021 Juan Orti Alcaine <jortialc@redhat.com> - 8.5.0-1
+- Version 8.5.0
+- Use py_provides macro
+- Run tests
+
 * Mon May 31 2021 Tomas Hrnciar <thrnciar@redhat.com> - 8.4.0-1
 - Update to 8.4.0
 
