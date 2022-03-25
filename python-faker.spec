@@ -1,3 +1,10 @@
+# tests disabled in RHEL
+%if 0%{?rhel}
+%bcond_with tests
+%else
+%bcond_without tests
+%endif
+
 %global srcname faker
 %global _description\
 Faker is a Python package that generates fake data for you. Whether you need\
@@ -6,7 +13,7 @@ persistence to stress test it, or anonymize data taken from a production\
 service, Faker is for you.
 
 Name: python-%{srcname}
-Version: 13.3.1
+Version: 13.3.3
 Release: 1%{?dist}
 Summary: Faker is a Python package that generates fake data for you
 License: MIT
@@ -15,13 +22,14 @@ Source: https://github.com/joke2k/%{srcname}/archive/v%{version}/%{srcname}-%{ve
 BuildArch: noarch
 BuildRequires: python3-devel
 BuildRequires: python3-setuptools
-# Tests
+%if %{with tests}
 BuildRequires: python3-pytest
 BuildRequires: python3-dateutil
 BuildRequires: python3-freezegun
 BuildRequires: python3-validators
 BuildRequires: python3-random2
 BuildRequires: python3-pillow
+%endif
 
 %description %_description
 
@@ -46,9 +54,11 @@ Summary: Documentation for %{name}
 %install
 %py3_install
 
+%if %{with tests}
 %check
 # Exclude tests that require the faker.sphinx module
 %pytest --ignore-glob='tests/sphinx/*'
+%endif
 
 %files -n python3-%{srcname}
 %license LICENSE.txt
@@ -61,6 +71,10 @@ Summary: Documentation for %{name}
 %doc README.rst CHANGELOG.md CONTRIBUTING.rst RELEASE_PROCESS.rst docs/*.rst
 
 %changelog
+* Fri Mar 25 2022 Juan Orti Alcaine <jortialc@redhat.com> - 13.3.3-1
+- Version 13.3.3 (#2064365)
+- Disable tests in RHEL
+
 * Wed Mar 09 2022 Juan Orti Alcaine <jortialc@redhat.com> - 13.3.1-1
 - Version 13.3.1 (#2051001)
 
