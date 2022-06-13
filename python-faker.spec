@@ -14,7 +14,7 @@ service, Faker is for you.
 
 Name: python-%{srcname}
 Version: 13.3.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Faker is a Python package that generates fake data for you
 License: MIT
 URL: https://faker.readthedocs.io
@@ -71,6 +71,9 @@ Summary: Documentation for %{name}
 %doc README.rst CHANGELOG.md CONTRIBUTING.rst RELEASE_PROCESS.rst docs/*.rst
 
 %changelog
+* Mon Jun 13 2022 Python Maint <python-maint@redhat.com> - 13.3.3-2
+- Rebuilt for Python 3.11
+
 * Fri Mar 25 2022 Juan Orti Alcaine <jortialc@redhat.com> - 13.3.3-1
 - Version 13.3.3 (#2064365)
 - Disable tests in RHEL
